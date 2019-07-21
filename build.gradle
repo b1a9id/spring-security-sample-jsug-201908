@@ -1,0 +1,34 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.b1a9idps'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation ("org.springframework.boot:spring-boot-starter-test") {
+		exclude group: 'junit'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.1'
+	testImplementation 'org.assertj:assertj-core:3.12.2'
+}
