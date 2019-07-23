@@ -21,14 +21,17 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.flywaydb:flyway-core'
+	runtimeOnly 'com.h2database:h2:1.4.197'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation ("org.springframework.boot:spring-boot-starter-test") {
 		exclude group: 'junit'
 	}
-	testImplementation 'org.springframework.security:spring-security-test'
+//	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.1'
 	testImplementation 'org.assertj:assertj-core:3.12.2'
 }

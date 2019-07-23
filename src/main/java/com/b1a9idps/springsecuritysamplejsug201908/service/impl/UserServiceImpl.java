@@ -1,6 +1,7 @@
 package com.b1a9idps.springsecuritysamplejsug201908.service.impl;
 
 import com.b1a9idps.springsecuritysamplejsug201908.dto.UserDto;
+import com.b1a9idps.springsecuritysamplejsug201908.entity.User;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
@@ -20,27 +21,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserDto> findAll() {
-		return new ArrayList<>(userRepository.findAll());
+		List<UserDto> userDtoList = new ArrayList<>();
+		userRepository.findAll().iterator()
+				.forEachRemaining(user -> userDtoList.add(UserDto.newUserDto(user)));
+		return userDtoList;
 	}
 
 	@Override
 	public UserDto findOne(Integer id) {
-		return userRepository.findOne(id);
+		return userRepository.findById(id)
+				.map(UserDto::newUserDto)
+				.get();
 	}
 
 	@Override
 	public UserDto create(UserCreateForm form) {
-		UserDto userDto = UserDto.of(
-				null,
+		User user = User.of(
 				form.getName(),
 				form.getAge(),
 				form.getGender(),
 				form.getRole());
-		return userRepository.create(userDto);
+		return UserDto.newUserDto(userRepository.save(user));
 	}
 
 	@Override
 	public void delete(Integer id) {
-		userRepository.delete(id);
+		userRepository.deleteById(id);
 	}
 }

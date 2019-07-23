@@ -3,12 +3,13 @@ package com.b1a9idps.springsecuritysamplejsug201908.controller;
 import com.b1a9idps.springsecuritysamplejsug201908.dto.UserDto;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/users")
-@RestController
+@Controller
 public class UserController {
 
 	private final UserService userService;

@@ -1,5 +1,6 @@
 package com.b1a9idps.springsecuritysamplejsug201908.dto;
 
+import com.b1a9idps.springsecuritysamplejsug201908.entity.User;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Gender;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
 
@@ -62,7 +63,7 @@ public class UserDto {
 		this.role = role;
 	}
 
-	public static UserDto of(Integer id, String name, Integer age, Gender gender, Role role) {
-		return new UserDto(id, name, age, gender, role);
+	public static UserDto newUserDto(User user) {
+		return new UserDto(user.getId(), user.getName(), user.getAge(), user.getGender(), user.getRole());
 	}
 }
