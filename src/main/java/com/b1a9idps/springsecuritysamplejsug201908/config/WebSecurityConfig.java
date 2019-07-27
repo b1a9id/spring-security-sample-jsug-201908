@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@SuppressWarnings("SpringJavaAutowiringInspection")
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -24,7 +23,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-					.anyRequest().permitAll();
+					.antMatchers("/login").permitAll()
+					.anyRequest().authenticated()
+				.and()
+					.formLogin()
+					.loginPage("/login")
+					.defaultSuccessUrl("/users", true)
+				.and()
+					.logout()
+					.logoutSuccessUrl("/login").permitAll()
+				.and()
+					.csrf().disable();
 	}
 
 	@Override
