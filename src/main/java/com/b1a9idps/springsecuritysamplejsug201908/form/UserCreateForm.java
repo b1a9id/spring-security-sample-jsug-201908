@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 public class UserCreateForm {
 	@NotEmpty
 	private String name;
+	@NotEmpty
+	private String password;
 	@NotNull
 	private Integer age;
 	@NotNull
@@ -22,6 +24,14 @@ public class UserCreateForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Integer getAge() {

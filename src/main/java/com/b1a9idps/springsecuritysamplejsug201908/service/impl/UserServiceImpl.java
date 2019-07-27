@@ -5,6 +5,7 @@ import com.b1a9idps.springsecuritysamplejsug201908.entity.User;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
 	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
-	public UserServiceImpl(UserRepository userRepository) {
+	public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -36,11 +39,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserDto create(UserCreateForm form) {
-		User user = User.of(
-				form.getName(),
-				form.getAge(),
-				form.getGender(),
-				form.getRole());
+		User user = new User();
+		user.setName(form.getName());
+		user.setPassword(passwordEncoder.encode(form.getPassword()));
+		user.setAge(form.getAge());
+		user.setGender(form.getGender());
+		user.setRole(form.getRole());
 		return UserDto.newUserDto(userRepository.save(user));
 	}
 
