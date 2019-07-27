@@ -6,49 +6,63 @@ import org.springframework.data.annotation.Id;
 
 public class User {
 	@Id
-	private final Integer id;
+	private Integer id;
 
-	private final String name;
+	private String name;
 
-	private final Integer age;
+	private String password;
 
-	private final Gender gender;
+	private Integer age;
 
-	private final Role role;
+	private Gender gender;
+
+	private Role role;
 
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Integer getAge() {
 		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public Gender getGender() {
 		return gender;
 	}
 
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
 	public Role getRole() {
 		return role;
 	}
 
-	private User(Integer id, String name, Integer age, Gender gender, Role role) {
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
+	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public static User of(String name, Integer age, Gender gender, Role role) {
-		return new User(null, name, age, gender, role);
-	}
-
-	public User withId(Integer id) {
-		return new User(id, name, age, gender, role);
 	}
 }
