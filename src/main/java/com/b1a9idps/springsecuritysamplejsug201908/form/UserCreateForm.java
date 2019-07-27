@@ -10,6 +10,8 @@ public class UserCreateForm {
 	@NotEmpty
 	private String name;
 	@NotEmpty
+	private String username;
+	@NotEmpty
 	private String password;
 	@NotNull
 	private Integer age;
@@ -24,6 +26,14 @@ public class UserCreateForm {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto create(UserCreateForm form) {
 		User user = new User();
 		user.setName(form.getName());
+		user.setUsername(form.getUsername());
 		user.setPassword(passwordEncoder.encode(form.getPassword()));
 		user.setAge(form.getAge());
 		user.setGender(form.getGender());
