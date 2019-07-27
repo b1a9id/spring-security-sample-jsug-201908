@@ -64,7 +64,12 @@
                   <td th:text="${user.age}">Jacob</td>
                   <td th:text="#{|user.field.gender.${user.gender}|}">Jacob</td>
                   <td th:text="#{|user.field.role.${user.role}|}">Jacob</td>
-                  <td><a class="btn btn-outline-dark" href="#"><i class="fa fa-trash fa-fw fa-1x py-1"></i></a></td>
+                  <td>
+                    <form method="post" th:action="@{/users/{id}(id=${user.id})}">
+                      <input type="hidden" name="_method" value="delete"/>
+                      <input class="btn btn-dark rounded" type="submit" value="削除">
+                    </form>
+                  </td>
                 </tr>
               </tbody>
             </table>

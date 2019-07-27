@@ -3,12 +3,48 @@ package com.b1a9idps.springsecuritysamplejsug201908.form;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Gender;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
 
-public interface UserCreateForm {
-	String getName();
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-	Integer getAge();
+public class UserCreateForm {
+	@NotEmpty
+	private String name;
+	@NotNull
+	private Integer age;
+	@NotNull
+	private Gender gender;
+	@NotNull
+	private Role role;
 
-	Gender getGender();
+	public String getName() {
+		return name;
+	}
 
-	Role getRole();
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 }
