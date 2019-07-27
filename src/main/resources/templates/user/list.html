@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
-
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+  <title>ユーザ一覧</title>
 </head>
 
 <body>
@@ -39,7 +39,7 @@
     </div>
     <div class="container py-1">
       <div class="row">
-        <div class="col-md-12 text-right"><a class="btn btn-primary" href="#" >新規登録</a></div>
+        <div class="col-md-12 text-right"><a class="btn btn-primary" th:href="@{/users/create}">新規登録</a></div>
       </div>
     </div>
     <div class="container">
@@ -58,14 +58,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>1</th>
-                  <td>Mark</td>
-                  <td>Jacob</td>
-                  <td>Jacob</td>
-                  <td>Jacob</td>
-                  <td contenteditable="true"><a class="btn btn-outline-dark" href="#"><i class="fa fa-trash fa-fw fa-1x py-1"></i></a></td>
-                </tr
+                <tr th:each="user : ${users}">
+                  <th th:text="${user.id}">1</th>
+                  <td><a th:href="@{/users/{id}(id=${user.id})}" th:text="${user.name}">Mark</a></td>
+                  <td th:text="${user.age}">Jacob</td>
+                  <td th:text="#{|user.field.gender.${user.gender}|}">Jacob</td>
+                  <td th:text="#{|user.field.role.${user.role}|}">Jacob</td>
+                  <td><a class="btn btn-outline-dark" href="#"><i class="fa fa-trash fa-fw fa-1x py-1"></i></a></td>
+                </tr>
               </tbody>
             </table>
           </div>

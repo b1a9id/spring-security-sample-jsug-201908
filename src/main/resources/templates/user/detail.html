@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
 
 <head>
   <meta charset="utf-8">
@@ -33,7 +33,7 @@
     <div class="container py-1">
       <div class="row">
         <div class="col-md-12">
-          <h2>田中太郎</h2>
+          <h2 th:text="${user.name}">田中太郎</h2>
         </div>
       </div>
     </div>
@@ -44,31 +44,31 @@
             <div class="form-group row">
               <legend class="col-2 col-form-label">ID</legend>
               <div class="col-10">
-                <p>1</p>
+                <p th:text="${user.id}">1</p>
               </div>
             </div>
             <div class="form-group row">
               <legend class="col-2 col-form-label">名前</legend>
               <div class="col-10">
-                <p>田中太郎</p>
+                <p th:text="${user.name}">田中太郎</p>
               </div>
             </div>
             <div class="form-group row">
               <legend class="col-2 col-form-label">年齢</legend>
               <div class="col-10">
-                <p>10</p>
+                <p th:text="${user.age}">10</p>
               </div>
             </div>
             <div class="form-group row">
               <legend class="col-2 col-form-label">性別</legend>
               <div class="col-10">
-                <p>男</p>
+                <p th:text="#{|user.field.gender.${user.gender}|}">男</p>
               </div>
             </div>
             <div class="form-group row">
               <legend class="col-2 col-form-label">権限</legend>
               <div class="col-10">
-                <p>田中太郎</p>
+                <p th:text="#{|user.field.role.${user.role}|}">田中太郎</p>
               </div>
             </div>
           </form>
