@@ -4,3 +4,9 @@ spring:
     url: jdbc:h2:mem:testdb;MODE=MySQL;
     username: username
     password:
+
+security:
+  roles:
+    hierarchyMap:
+      ROLE_OWNER: ROLE_MANAGER
+      ROLE_MANAGER: ROLE_STAFF

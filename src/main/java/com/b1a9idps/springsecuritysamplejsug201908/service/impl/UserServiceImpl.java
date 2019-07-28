@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@PreAuthorize("hasAnyRole('OWNER', 'MANAGER')")
+	@PreAuthorize("hasRole('MANAGER')")
 	public UserDto create(UserCreateForm form) {
 		User user = new User();
 		user.setName(form.getName());
