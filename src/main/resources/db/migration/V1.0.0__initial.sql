@@ -9,6 +9,7 @@ CREATE TABLE user (
   PRIMARY KEY (id)
 );
 
+-- password -> 12345678
 INSERT INTO user (name, username, password, age, gender, role)
   VALUES ('内立　良介', 'ruchitate', '$2a$10$1ppG6VNBT0/vLRvxZoO/jeH23T9KI3Ln8Al0bibb0JvBB2ysLXQEa', 29, 'MAN', 'OWNER'),
          ('新垣　結衣', 'yaragaki', '$2a$10$1ppG6VNBT0/vLRvxZoO/jeH23T9KI3Ln8Al0bibb0JvBB2ysLXQEa', 31, 'WOMAN', 'MANAGER'),
