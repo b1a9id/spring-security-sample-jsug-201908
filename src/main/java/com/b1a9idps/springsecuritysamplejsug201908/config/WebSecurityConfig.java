@@ -2,6 +2,7 @@ package com.b1a9idps.springsecuritysamplejsug201908.config;
 
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
+import com.b1a9idps.springsecuritysamplejsug201908.security.access.RoleEvaluator;
 import com.b1a9idps.springsecuritysamplejsug201908.security.core.userdetails.UserDetailsManager;
 import com.b1a9idps.springsecuritysamplejsug201908.security.properties.SecurityRolesProperties;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public RoleHierarchy roleHierarchy(SecurityRolesProperties rolesProperties) {
 		return rolesProperties.getRoleHierarchy();
+	}
+
+	@Bean
+	public RoleEvaluator roleEvaluator(RoleHierarchy roleHierarchy) {
+		return new RoleEvaluator(roleHierarchy);
 	}
 
 	@Override
