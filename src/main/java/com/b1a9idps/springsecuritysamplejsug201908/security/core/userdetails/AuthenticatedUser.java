@@ -10,17 +10,18 @@ import java.util.Collection;
 
 public class AuthenticatedUser implements UserDetails {
 
-	private Integer id;
+	private final Integer id;
 
-	private String name;
+	private final String name;
 
-	private String username;
+	private final String username;
 
-	private String password;
+	private final String password;
 
-	private Role role;
+	private final Role role;
 
 	public AuthenticatedUser(User user) {
+		this.id = user.getId();
 		this.name = user.getName();
 		this.username = user.getUsername();
 		this.password = user.getPassword();

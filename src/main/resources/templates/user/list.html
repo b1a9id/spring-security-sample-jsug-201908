@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ja">
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="container py-1">
+    <div sec:authorize="hasAnyRole('OWNER','MANAGER')" class="container py-1">
       <div class="row">
         <div class="col-md-12 text-right">
           <a class="btn btn-primary" th:href="@{/users/create}">新規登録</a>
@@ -37,7 +37,7 @@
                   <th>Age</th>
                   <th>Gender</th>
                   <th>Role</th>
-                  <th></th>
+                  <th sec:authorize="hasAnyRole('OWNER')"></th>
                 </tr>
               </thead>
               <tbody>
@@ -47,7 +47,7 @@
                   <td th:text="${user.age}">Jacob</td>
                   <td th:text="#{|user.field.gender.${user.gender}|}">Jacob</td>
                   <td th:text="#{|user.field.role.${user.role}|}">Jacob</td>
-                  <td>
+                  <td sec:authorize="hasAnyRole('OWNER')">
                     <form method="post" th:action="@{/users/{id}(id=${user.id})}">
                       <input type="hidden" name="_method" value="delete"/>
                       <input class="btn btn-dark rounded" type="submit" value="削除">
