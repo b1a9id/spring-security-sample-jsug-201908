@@ -27,6 +27,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.webjars:bootstrap:4.3.1'
+	implementation 'org.webjars:jquery:3.4.1'
+	implementation 'org.webjars:popper.js:1.15.0'
 	runtimeOnly 'com.h2database:h2:1.4.197'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation ("org.springframework.boot:spring-boot-starter-test") {
