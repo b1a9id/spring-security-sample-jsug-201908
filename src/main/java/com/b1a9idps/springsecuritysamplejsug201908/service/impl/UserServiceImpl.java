@@ -7,6 +7,7 @@ import com.b1a9idps.springsecuritysamplejsug201908.exception.NotAllowedOperation
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,6 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PostAuthorize("returnObject != null && @roleEvaluator.hasRole(principal, returnObject.role)")
 	public UserDto findOne(Integer id) {
 		return userRepository.findById(id)
 				.map(UserDto::newUserDto)
