@@ -2,9 +2,12 @@ package com.b1a9idps.springsecuritysamplejsug201908.service.impl;
 
 import com.b1a9idps.springsecuritysamplejsug201908.dto.UserDto;
 import com.b1a9idps.springsecuritysamplejsug201908.entity.User;
+import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
+import com.b1a9idps.springsecuritysamplejsug201908.exception.NotAllowedOperationException;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasAnyRole('OWNER', 'MANAGER')")
 	public UserDto create(UserCreateForm form) {
 		User user = new User();
 		user.setName(form.getName());
@@ -50,7 +54,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@PreAuthorize("hasRole('OWNER')")
 	public void delete(Integer id) {
+		userRepository.findById(id)
+				.filter(u -> u.getRole() != Role.OWNER)
+				.orElseThrow(NotAllowedOperationException::new);
 		userRepository.deleteById(id);
 	}
 }
