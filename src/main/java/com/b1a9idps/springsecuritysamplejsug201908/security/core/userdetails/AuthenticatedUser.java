@@ -10,6 +10,8 @@ import java.util.Collection;
 
 public class AuthenticatedUser implements UserDetails {
 
+	private Integer id;
+
 	private String name;
 
 	private String username;
@@ -23,6 +25,10 @@ public class AuthenticatedUser implements UserDetails {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.role = user.getRole();
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getName() {

@@ -2,8 +2,11 @@ package com.b1a9idps.springsecuritysamplejsug201908.controller;
 
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Gender;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
+import com.b1a9idps.springsecuritysamplejsug201908.exception.NotAllowedOperationException;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
+import com.b1a9idps.springsecuritysamplejsug201908.security.core.userdetails.AuthenticatedUser;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -60,7 +63,10 @@ public class UserController {
 	}
 
 	@DeleteMapping("{id}")
-	public String delete(@PathVariable Integer id) {
+	public String delete(@PathVariable Integer id, @AuthenticationPrincipal AuthenticatedUser authenticatedUser) {
+		if (authenticatedUser.getId().equals(id)) {
+			throw new NotAllowedOperationException();
+		}
 		userService.delete(id);
 		return "redirect:/users";
 	}
