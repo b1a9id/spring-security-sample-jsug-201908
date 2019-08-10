@@ -35,7 +35,7 @@ dependencies {
 	testImplementation ("org.springframework.boot:spring-boot-starter-test") {
 		exclude group: 'junit'
 	}
-//	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.1'
 	testImplementation 'org.assertj:assertj-core:3.12.2'
 }
