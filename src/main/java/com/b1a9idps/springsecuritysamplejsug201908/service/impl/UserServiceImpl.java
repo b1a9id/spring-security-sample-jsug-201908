@@ -7,6 +7,7 @@ import com.b1a9idps.springsecuritysamplejsug201908.exception.NotAllowedOperation
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -48,21 +49,17 @@ public class UserServiceImpl implements UserService {
 	@PreAuthorize("hasRole('MANAGER')")
 	public UserDto create(UserCreateForm form) {
 		User user = new User();
-		user.setName(form.getName());
-		user.setUsername(form.getUsername());
+		BeanUtils.copyProperties(form, user, "password");
 		user.setPassword(passwordEncoder.encode(form.getPassword()));
-		user.setAge(form.getAge());
-		user.setGender(form.getGender());
-		user.setRole(form.getRole());
 		return UserDto.newUserDto(userRepository.save(user));
 	}
 
 	@Override
 	@PreAuthorize("hasRole('OWNER')")
 	public void delete(Integer id) {
-		userRepository.findById(id)
+		User user = userRepository.findById(id)
 				.filter(u -> u.getRole() != Role.OWNER)
 				.orElseThrow(NotAllowedOperationException::new);
-		userRepository.deleteById(id);
+		userRepository.delete(user);
 	}
 }
