@@ -4,6 +4,7 @@ import com.b1a9idps.springsecuritysamplejsug201908.dto.UserDto;
 import com.b1a9idps.springsecuritysamplejsug201908.entity.User;
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
 import com.b1a9idps.springsecuritysamplejsug201908.exception.NotAllowedOperationException;
+import com.b1a9idps.springsecuritysamplejsug201908.exception.NotFoundException;
 import com.b1a9idps.springsecuritysamplejsug201908.form.UserCreateForm;
 import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.service.UserService;
@@ -42,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto findOne(Integer id) {
 		return userRepository.findById(id)
 				.map(UserDto::newUserDto)
-				.get();
+				.orElseThrow(NotFoundException::new);
 	}
 
 	@Override
