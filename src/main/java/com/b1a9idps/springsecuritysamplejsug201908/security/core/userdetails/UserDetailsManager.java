@@ -4,7 +4,9 @@ import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserDetailsManager implements UserDetailsService {
 
 	private final UserRepository userRepository;

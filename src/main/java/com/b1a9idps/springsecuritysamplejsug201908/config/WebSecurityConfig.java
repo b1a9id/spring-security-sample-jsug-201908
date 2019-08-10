@@ -1,7 +1,6 @@
 package com.b1a9idps.springsecuritysamplejsug201908.config;
 
 import com.b1a9idps.springsecuritysamplejsug201908.enums.Role;
-import com.b1a9idps.springsecuritysamplejsug201908.repository.UserRepository;
 import com.b1a9idps.springsecuritysamplejsug201908.security.access.RoleEvaluator;
 import com.b1a9idps.springsecuritysamplejsug201908.security.core.userdetails.UserDetailsManager;
 import com.b1a9idps.springsecuritysamplejsug201908.security.properties.SecurityRolesProperties;
@@ -22,10 +21,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final UserRepository userRepository;
+	private final UserDetailsManager userDetailsManager;
 
-	public WebSecurityConfig(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public WebSecurityConfig(UserDetailsManager userDetailsManager) {
+		this.userDetailsManager = userDetailsManager;
 	}
 
 	@Bean
@@ -62,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(new UserDetailsManager(userRepository))
+		auth.userDetailsService(userDetailsManager)
 				.passwordEncoder(passwordEncoder());
 	}
 
