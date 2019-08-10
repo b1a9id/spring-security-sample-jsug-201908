@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div sec:authorize="hasAnyRole('OWNER','MANAGER')" class="container py-1">
+    <div sec:authorize="hasRole('MANAGER')" class="container py-1">
       <div class="row">
         <div class="col-md-12 text-right">
           <a class="btn btn-primary" th:href="@{/users/create}">新規登録</a>
@@ -37,7 +37,7 @@
                   <th>Age</th>
                   <th>Gender</th>
                   <th>Role</th>
-                  <th sec:authorize="hasAnyRole('OWNER')"></th>
+                  <th sec:authorize="hasRole('OWNER')"></th>
                 </tr>
               </thead>
               <tbody>
@@ -47,7 +47,7 @@
                   <td th:text="${user.age}">Jacob</td>
                   <td th:text="#{|user.field.gender.${user.gender}|}">Jacob</td>
                   <td th:text="#{|user.field.role.${user.role}|}">Jacob</td>
-                  <td sec:authorize="hasAnyRole('OWNER')">
+                  <td sec:authorize="hasRole('OWNER')">
                     <form method="post" th:action="@{/users/{id}(id=${user.id})}">
                       <input type="hidden" name="_method" value="delete"/>
                       <input class="btn btn-dark rounded" type="submit" value="削除">
