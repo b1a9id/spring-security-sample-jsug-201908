@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div sec:authorize="hasRole('MANAGER')" class="container py-1">
+    <div sec:authorize="hasAnyRole('OWNER','MANAGER')" class="container py-1">
       <div class="row">
         <div class="col-md-12 text-right">
           <a class="btn btn-primary" th:href="@{/users/create}">新規登録</a>
