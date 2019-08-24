@@ -7,6 +7,6 @@ spring:
 
 security:
   roles:
-    hierarchyMap:
+    hierarchy-map:
       ROLE_OWNER: ROLE_MANAGER
       ROLE_MANAGER: ROLE_STAFF
