@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.b1a9idps'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -39,6 +39,16 @@ dependencies {
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.5.1'
 	testImplementation 'org.assertj:assertj-core:3.12.2'
 }
+
+bootJar {
+	launchScript()
+}
+
+task buildDeployZip(type: Zip) {
+	from bootJar
+	from 'src/dist'
+}
+build.dependsOn buildDeployZip
 
 test {
 	useJUnitPlatform()
